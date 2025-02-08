@@ -15,3 +15,14 @@ export async function getImageID(imageUrl: string) {
         data: Image.id
     };
 }
+
+export async function getImages() {
+    const images = await prisma.image.findMany({
+      });
+  
+    return {
+        status: "success",
+        message: "Organization created successfully",
+        data: images
+    };
+}

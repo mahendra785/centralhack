@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-
+import { proccessImageAndSave } from "../actions/proccessImage";
 export default function FileUploadTest() {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+  const [image, setImage] = useState<string | null>(null);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFile(e.target.files[0]);
@@ -39,6 +39,9 @@ export default function FileUploadTest() {
       }
 
       const data = await response.json();
+      const res = await proccessImageAndSave(data.image.id);
+
+      setImage(res.proccessImage || null);
       setUploadedUrl(data.url);
     } catch (err) {
       setError("Failed to upload file. Please try again.");
@@ -125,6 +128,15 @@ export default function FileUploadTest() {
           <div className="mt-4 max-w-xs mx-auto">
             <img
               src={URL.createObjectURL(file)}
+              alt="Preview"
+              className="object-contain w-full h-64"
+            />
+          </div>
+        )}
+        {image && (
+          <div className="mt-4 max-w-xs mx-auto">
+            <img
+              src={image}
               alt="Preview"
               className="object-contain w-full h-64"
             />
