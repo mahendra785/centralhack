@@ -19,3 +19,12 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@font-face {
+  font-family: 'deutschlander';
+  src: url('../public/fonts/Deutschlander.otf') format('opentype');
+}
+
+.deutschlander {
+  font-family: 'deutschlander', Arial, Helvetica, sans-serif;
+}
