@@ -52,6 +52,7 @@ model User {
   accounts Account[]
   sessions Session[]
   images Image[]
+  videos Video[]
 
   organizationId String?
   organization Organization? @relation(fields: [organizationId], references: [id])
@@ -80,7 +81,7 @@ model Image {
   userId            String
   user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   
-  wasteAnalysis     WasteAnalysis?
+  wasteAnalysis     WasteAnalysisOfImage?
   
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
@@ -88,7 +89,23 @@ model Image {
   @@index([userId])
 }
 
-model WasteAnalysis {
+model Video {
+  id                 String    @id @default(cuid())
+  name               String    @default("")
+  videoUrl          String
+  processedVideoUrl String?
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  wasteAnalysis     WasteAnalysisOfVideo?
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model WasteAnalysisOfImage {
   id                    String    @id @default(cuid())
   imageId              String    @unique
   image                Image     @relation(fields: [imageId], references: [id], onDelete: Cascade)
@@ -97,16 +114,16 @@ model WasteAnalysis {
   wasteCoverage        Float
   distributionEvenness Float
   
-  compositions         WasteComposition[]
+  compositions         WasteCompositionOfImage[]
   
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
 }
 
-model WasteComposition {
+model WasteCompositionOfImage {
   id                String        @id @default(cuid())
-  wasteAnalysisId   String
-  wasteAnalysis     WasteAnalysis @relation(fields: [wasteAnalysisId], references: [id], onDelete: Cascade)
+  wasteAnalysisOfImageId   String
+  wasteAnalysisOfImage     WasteAnalysisOfImage @relation(fields: [wasteAnalysisOfImageId], references: [id], onDelete: Cascade)
   
   type              WasteType
   present           Boolean
@@ -117,8 +134,37 @@ model WasteComposition {
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
 
-  @@index([wasteAnalysisId])
+  @@index([wasteAnalysisOfImageId])
 }
+
+model WasteAnalysisOfVideo {
+  id                    String    @id @default(cuid())
+  videoId              String    @unique
+  video                Video     @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  
+  totalWeightKg        Float
+  
+  compositions         WasteCompositionOfVideo[]
+  
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}
+
+model WasteCompositionOfVideo {
+  id                String        @id @default(cuid())
+  wasteAnalysisOfVideoId   String
+  wasteAnalysisOfVideo     WasteAnalysisOfVideo @relation(fields: [wasteAnalysisOfVideoId], references: [id], onDelete: Cascade)
+  
+  type              WasteType
+  present           Boolean
+  estimatedWeightKg Float
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([wasteAnalysisOfVideoId])
+}
+
 
 enum WasteType {
   RIGID_PLASTIC
