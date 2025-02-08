@@ -7,7 +7,7 @@ export async function processImage(imageUrl: string, imageId: string, userId: st
         const response = await fetch(`${process.env.ML_SERVER_URL}/analyze-waste`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ imageUrl }),
+            body: JSON.stringify({ image_url: imageUrl }),
         });
 
         const data = await response.json();
