@@ -54,7 +54,7 @@ model User {
 
   organizationId String?
   organization Organization? @relation(fields: [organizationId], references: [id])
-  Role MembershipRole
+  Role MembershipRole?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
