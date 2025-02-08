@@ -3,11 +3,6 @@ import { auth } from "@/app/(auth)/auth";
 import { CreateOrganizationType } from "@/lib/validation/schema";
 
 export async function createOrg(body: CreateOrganizationType) {
-    const session = await auth();
-    const user = session?.user;
-    if (!user) {
-       //do something
-    }
     const org = await prisma.organization.create({
         data: {
             name: body.name,

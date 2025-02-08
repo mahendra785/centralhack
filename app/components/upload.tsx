@@ -1,14 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { getImages } from "../actions/getImageId";
-import { console } from "inspector";
+import { useState } from "react";
+import { proccessImageAndSave } from "../actions/proccessImage";
 export default function FileUploadTest() {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+  const [image, setImage] = useState<string | null>(null);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFile(e.target.files[0]);
@@ -40,6 +39,9 @@ export default function FileUploadTest() {
       }
 
       const data = await response.json();
+      const res = await proccessImageAndSave(data.image.id);
+
+      setImage(res.proccessImage || null);
       setUploadedUrl(data.url);
     } catch (err) {
       setError("Failed to upload file. Please try again.");
@@ -48,23 +50,13 @@ export default function FileUploadTest() {
       setUploading(false);
     }
   };
-  const [images, setImages] = useState<any[]>([]);
-
-  useEffect(() => {
-    const fetchImages = async () => {
-      const result = await getImages();
-      console.log(result);
-      setImages(result.data || []);
-    };
-    fetchImages();
-  }, []);
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <div className="space-y-8">
+    <div className="max-w-3xl mx-auto p-6">
+      <div className="space-y-2">
         <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
           <div className="space-y-4">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-lg font-semibold text-gray-100">
               Upload File
             </label>
             <input
@@ -74,15 +66,13 @@ export default function FileUploadTest() {
               disabled={uploading}
             />
           </div>
-
           {file && (
             <div className="mt-4">
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-300">
                 Selected file: {file.name}
               </p>
             </div>
           )}
-
           <button
             onClick={handleUpload}
             disabled={!file || uploading}
@@ -91,13 +81,11 @@ export default function FileUploadTest() {
             {uploading ? "Uploading..." : "Upload"}
           </button>
         </div>
-
         {error && (
           <div className="rounded-md bg-red-50 p-4">
             <div className="text-sm text-red-700">{error}</div>
           </div>
         )}
-
         {uploadedUrl && (
           <div className="rounded-md bg-green-50 p-4">
             <p className="text-sm text-green-700">
@@ -111,26 +99,36 @@ export default function FileUploadTest() {
             >
               {uploadedUrl}
             </a>
-          </div>
-        )}
-        {/* Image Gallery */}
-        <div className="mt-8">
-          <h2 className="text-lg font-semibold mb-4">Uploaded Images</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {images?.map((image, index) => (
-              <div
-                key={index}
-                className="relative aspect-square rounded-lg overflow-hidden"
-              >
+
+            {uploadedUrl && (
+              <div className="mt-4 max-w-xs mx-auto">
                 <img
-                  src={image.url}
-                  alt={`Uploaded image ${index + 1}`}
-                  className="object-cover w-full h-full"
+                  src={uploadedUrl}
+                  alt="Uploaded preview"
+                  className="object-contain w-full h-64 "
                 />
               </div>
-            ))}
+            )}
           </div>
-        </div>
+        )}
+        {file && file.type.startsWith("image/") && !uploadedUrl && (
+          <div className="mt-4 max-w-xs mx-auto">
+            <img
+              src={URL.createObjectURL(file)}
+              alt="Preview"
+              className="object-contain w-full h-64"
+            />
+          </div>
+        )}
+        {image && (
+          <div className=" max-w-xs mx-auto">
+            <img
+              src={image}
+              alt="Preview"
+              className="object-contain w-full h-64"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
