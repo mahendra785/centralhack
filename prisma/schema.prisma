@@ -52,7 +52,9 @@ model User {
   accounts Account[]
   sessions Session[]
 
-  organizationMembership OrganizationMembership?  @relation("UserMembership")
+  organizationId String?
+  organization Organization? @relation(fields: [organizationId], references: [id])
+  Role MembershipRole
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -66,21 +68,9 @@ model Organization {
   createdAt              DateTime                 @default(now())
   updatedAt              DateTime                 @updatedAt
   
-  members                OrganizationMembership[]
+  members User[]
 }
 
-model OrganizationMembership {
-  id             String       @id @default(cuid())
-  organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id])
-
-  userId         String @unique 
-  user           User   @relation(fields: [userId], references: [id], name: "UserMembership")
-  
-  role           MembershipRole
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-}
 
 enum MembershipRole {
   ADMIN
