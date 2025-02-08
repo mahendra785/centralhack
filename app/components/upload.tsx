@@ -49,11 +49,12 @@ export default function FileUploadTest() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="max-w-3xl mx-auto p-6">
       <div className="space-y-8">
+        {/* File upload container */}
         <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
           <div className="space-y-4">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-lg font-semibold text-gray-100">
               Upload File
             </label>
             <input
@@ -64,14 +65,16 @@ export default function FileUploadTest() {
             />
           </div>
 
+          {/* Display selected file */}
           {file && (
             <div className="mt-4">
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-300">
                 Selected file: {file.name}
               </p>
             </div>
           )}
 
+          {/* Upload button */}
           <button
             onClick={handleUpload}
             disabled={!file || uploading}
@@ -81,12 +84,14 @@ export default function FileUploadTest() {
           </button>
         </div>
 
+        {/* Error Message */}
         {error && (
           <div className="rounded-md bg-red-50 p-4">
             <div className="text-sm text-red-700">{error}</div>
           </div>
         )}
 
+        {/* Success Message and Image Preview */}
         {uploadedUrl && (
           <div className="rounded-md bg-green-50 p-4">
             <p className="text-sm text-green-700">
@@ -100,6 +105,29 @@ export default function FileUploadTest() {
             >
               {uploadedUrl}
             </a>
+
+            {/* Image preview for uploaded images */}
+            {uploadedUrl && (
+              <div className="mt-4 max-w-xs mx-auto">
+                {/* If the uploaded file is an image, show the preview */}
+                <img
+                  src={uploadedUrl}
+                  alt="Uploaded preview"
+                  className="object-contain w-full h-64 "
+                />
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Image preview before uploading (optional feature) */}
+        {file && file.type.startsWith("image/") && !uploadedUrl && (
+          <div className="mt-4 max-w-xs mx-auto">
+            <img
+              src={URL.createObjectURL(file)}
+              alt="Preview"
+              className="object-contain w-full h-64"
+            />
           </div>
         )}
       </div>

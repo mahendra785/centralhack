@@ -35,9 +35,9 @@ export default function Home() {
         initial={{ y: 0, opacity: 0 }}
         animate={{ y: animateText ? "-180%" : "0%", opacity: 1 }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
-        className="absolute text-[200px] font-extrabold font-mono text-white leading-[100px]"
+        className="absolute deutschlander text-[300px] text-white leading-[100px]"
       >
-        The Postmen
+        SORT IQ
       </motion.div>
 
       {/* Animated Button */}
