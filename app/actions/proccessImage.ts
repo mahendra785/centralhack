@@ -1,3 +1,4 @@
+"use server"
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/app/(auth)/auth";
 import { processImage } from "@/utils/ml-actions/proccessImage";
@@ -32,6 +33,6 @@ export async function proccessImageAndSave(imageId: string) {
         status: "success",
         message: "Image proccessed successfully",
         proccessImage: processedImageUrl,
-        analysis: analysis
+       // analysis: analysis
     };
 }
