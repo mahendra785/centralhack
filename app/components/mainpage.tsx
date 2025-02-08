@@ -9,7 +9,7 @@ export default function Home() {
   const [showButton, setShowButton] = useState(false);
   const handleSignIn = async () => {
     try {
-      await Signin(); // ✅ Redirects to /upload after signing in
+      await Signin();
     } catch (error) {
       console.error("Error during sign-in:", error);
     } finally {
@@ -17,8 +17,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setTimeout(() => setAnimateText(true), 500); // Delay animation start
-    setTimeout(() => setShowButton(true), 2000); // Show button after text animation
+    setTimeout(() => setAnimateText(true), 500);
+    setTimeout(() => setShowButton(true), 2000);
   }, []);
 
   return (
@@ -29,8 +29,6 @@ export default function Home() {
         fill
         className="object-cover opacity-50"
       />
-
-      {/* Animated Text */}
       <motion.div
         initial={{ y: 0, opacity: 0 }}
         animate={{ y: animateText ? "-180%" : "0%", opacity: 1 }}
@@ -39,8 +37,6 @@ export default function Home() {
       >
         SORT IQ
       </motion.div>
-
-      {/* Animated Button */}
       {showButton && (
         <motion.button
           initial={{ y: 100, opacity: 0 }}

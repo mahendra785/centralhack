@@ -9,7 +9,22 @@ import FileUploadTest from "./upload";
 const Organization: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeFeature, setActiveFeature] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+
+  // Handle screen resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth < 768) {
+        setIsExpanded(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -25,64 +40,71 @@ const Organization: React.FC = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [sidebarRef]); // Added sidebarRef to dependencies
+  }, [sidebarRef]);
 
   const features = [
-    { name: "Feature 1", icon: "/feat1.svg", component: <FileUploadTest /> },
     {
-      name: "Feature 2",
+      name: "Live Video Stream",
+      icon: "/feat1.svg",
+      component: <FileUploadTest />,
+    },
+    {
+      name: "History ",
       icon: "/feat2.svg",
-      component: <div>Feature 2 Content</div>,
+      component: <div>History</div>,
     },
     {
-      name: "Feature 3",
+      name: "Analytics",
       icon: "/feat3.svg",
-      component: <div>Feature 3 Content</div>,
+      component: <div>Analytics</div>,
     },
     {
-      name: "Feature 4",
+      name: "Organization",
       icon: "/feat4.svg",
-      component: <div>Feature 4 Content</div>,
+      component: <div>Organization</div>,
     },
     {
-      name: "Feature 5",
+      name: "ESG Reports",
       icon: "/feat5.svg",
-      component: <div>Feature 5 Content</div>,
+      component: <div>ESG Reports</div>,
     },
     {
-      name: "Feature 6",
+      name: "Custom Reports ",
       icon: "/feat6.svg",
-      component: <div>Feature 6 Content</div>,
+      component: <div>Custom Reports</div>,
     },
     {
-      name: "Feature 7",
+      name: "Performance Reports",
       icon: "/feat7.svg",
-      component: <div>Feature 7 Content</div>,
+      component: <div>Performance Reports</div>,
     },
   ];
 
   return (
-    <div className="flex-col relative w-screen h-screen flex overflow-hidden bg-black">
+    <div className="flex-col relative w-full min-h-screen flex overflow-hidden bg-black">
       <Image
         src={bg || "/placeholder.svg"}
         alt="CentralHack"
         fill
         className="object-cover opacity-75"
+        priority
       />
-      <div className="w-full flex justify-center z-20 deutschlander text-6xl">
+      <div className="w-full flex justify-center z-20 deutschlander text-4xl md:text-6xl p-4">
         Sort IQ
       </div>
-      <div className="h-full w-full z-20 flex flex-row pl-6 space-x-6">
-        {/* Left Box (Sidebar) */}
+      <div className="h-full w-full z-20 flex flex-col md:flex-row px-2 md:px-6 space-y-4 md:space-y-0 md:space-x-6 pb-4">
+        {/* Sidebar */}
         <div
           ref={sidebarRef}
-          className={`transition-all ease-in-out h-[90vh] ${
-            isExpanded ? "w-[15vw]" : "w-[6vw]"
+          className={`transition-all ease-in-out ${
+            isMobile ? "w-full h-auto" : "h-[88vh]"
+          } ${
+            isExpanded ? "md:w-[15vw]" : "md:w-[6vw]"
           } rounded-[24px] bg-[rgba(53,53,53,0.83)] flex justify-center items-start pt-4 rounded-b-[24px] backdrop-blur-[33.722px]`}
         >
-          {isExpanded ? (
-            <div>
-              <div className="flex flex-row items-center space-x-2">
+          {isExpanded && !isMobile ? (
+            <div className="w-full">
+              <div className="flex flex-row items-center pl-4 space-x-2">
                 <Image
                   src="/expanded.svg"
                   alt="expand"
@@ -91,13 +113,15 @@ const Organization: React.FC = () => {
                   className="hover:scale-[1.04] cursor-pointer"
                   onClick={() => setIsExpanded(!isExpanded)}
                 />
-                <div className="deutschlander text-5xl">Features</div>
+                <div className="deutschlander text-3xl md:text-5xl">
+                  Features
+                </div>
               </div>
-              <div className="flex flex-col space-y-6 mt-4">
+              <div className="flex flex-col space-y-6 mt-4 pb-4">
                 {features.map((feature, index) => (
                   <div
                     key={index}
-                    className="flex items-center space-x-2 cursor-pointer"
+                    className="flex items-center pl-4 space-x-2 cursor-pointer"
                     onClick={() => setActiveFeature(index)}
                   >
                     <Image
@@ -107,21 +131,27 @@ const Organization: React.FC = () => {
                       height={70}
                       className="hover:scale-[1.04]"
                     />
-                    <div>{feature.name}</div>
+                    <div className="text-sm md:text-base">{feature.name}</div>
                   </div>
                 ))}
               </div>
             </div>
           ) : (
-            <div className="flex flex-col space-y-4">
-              <Image
-                src="/expand.svg"
-                alt="expand"
-                width={60}
-                height={60}
-                className="hover:scale-[1.04] cursor-pointer"
-                onClick={() => setIsExpanded(!isExpanded)}
-              />
+            <div
+              className={`flex ${
+                isMobile ? "flex-row justify-around w-full pb-4" : "flex-col"
+              } space-y-0 md:space-y-4`}
+            >
+              {!isMobile && (
+                <Image
+                  src="/expand.svg"
+                  alt="expand"
+                  width={60}
+                  height={60}
+                  className="hover:scale-[1.04] cursor-pointer"
+                  onClick={() => setIsExpanded(!isExpanded)}
+                />
+              )}
               {features.map((feature, index) => (
                 <div
                   key={index}
@@ -131,18 +161,21 @@ const Organization: React.FC = () => {
                   <Image
                     src={feature.icon || "/placeholder.svg"}
                     alt={feature.name}
-                    width={60}
-                    height={60}
+                    width={isMobile ? 40 : 60}
+                    height={isMobile ? 40 : 60}
                     className="hover:scale-[1.04] pt-2"
                   />
+                  {isMobile && (
+                    <div className="text-xs mt-1">{feature.name}</div>
+                  )}
                 </div>
               ))}
             </div>
           )}
         </div>
 
-        {/* Right Box */}
-        <div className="w-[90vw] pr-4 h-[90vh] rounded-b-[24px] rounded-[24px] bg-[rgba(53,53,53,0.83)] flex justify-center backdrop-blur-[33.722px]">
+        {/* Main Content */}
+        <div className="flex-1 min-h-[50vh] md:h-[88vh] rounded-[24px] bg-[rgba(53,53,53,0.83)] flex justify-center backdrop-blur-[33.722px]">
           {activeFeature !== null && features[activeFeature].component}
         </div>
       </div>
