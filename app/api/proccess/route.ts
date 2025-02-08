@@ -60,8 +60,7 @@ export async function POST(req: NextRequest) {
     const image = await prisma.image.create({
       data: {
         imageUrl: url,
-        userId: user.id,
-        name: fileName
+        userId: user.id
       }
     });
     
