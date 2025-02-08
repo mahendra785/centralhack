@@ -16,12 +16,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           const checkuser = prisma.user.findUnique({
             where: {
               email: user.email
-            }
+            },
           })
             if (checkuser) {
-                return redirect("/upload");
+                 redirect("/upload");
             } else {
-                return redirect("/create");
+                 redirect("/create");
             }
         }
     }
