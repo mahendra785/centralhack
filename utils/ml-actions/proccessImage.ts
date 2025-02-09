@@ -10,7 +10,6 @@ export async function processImage(imageUrl: string, imageId: string, userId: st
         });
 
         const data = await response.json();
-        console.log(data);
         
         const base64Image = data.visualization.replace(/^data:image\/\w+;base64,/, '');
         const buffer = Buffer.from(base64Image, 'base64');
