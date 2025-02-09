@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import bg from "../../public/BG.svg";
 import Signin from "../../app/(auth)/authactions/signin";
+import { useSession } from "next-auth/react";
 export default function Home() {
   const [animateText, setAnimateText] = useState(false);
   const [showButton, setShowButton] = useState(false);
@@ -20,7 +21,7 @@ export default function Home() {
     setTimeout(() => setAnimateText(true), 500);
     setTimeout(() => setShowButton(true), 2000);
   }, []);
-
+  const { data: session } = useSession();
   return (
     <div className="relative w-screen h-screen flex items-center justify-center overflow-hidden bg-black">
       <Image

@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
     
     return Response.json({
       status: 'success',
-      image: video
+      video: video
     });
   } catch (error) {
     console.error('Upload error:', error);

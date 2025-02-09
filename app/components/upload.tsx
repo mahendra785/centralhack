@@ -2,12 +2,16 @@
 
 import { useState } from "react";
 import { proccessImageAndSave } from "../actions/proccessImage";
+import { auth } from "../(auth)/auth";
+import { prisma } from "../../lib/prisma";
+
 export default function FileUploadTest() {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [image, setImage] = useState<string | null>(null);
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFile(e.target.files[0]);
@@ -51,9 +55,36 @@ export default function FileUploadTest() {
     }
   };
 
+  async function getImageAnalysis(imageId: string) {
+    const session = await auth();
+    if (!session?.user?.email) return [];
+
+    try {
+      const analysis = await prisma.wasteAnalysisOfImage.findMany({
+        where: {
+          imageId: imageId,
+        },
+      });
+      return analysis ?? [];
+    } catch (error) {
+      console.error("Error fetching videos:", error);
+      return [];
+    } finally {
+      await prisma.$disconnect();
+    }
+  }
+
+  const colorSchemeItems = [
+    { color: "rgb(255, 0, 0)", label: "Hard Plastic" },
+    { color: "rgb(0, 255, 0)", label: "Cardboard" },
+    { color: "#4241B8", label: "Metal" },
+    { color: "#713472", label: "Soft Plastic" },
+  ];
+
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <div className="space-y-2">
+    <div className="w-full max-w-6xl mx-auto p-6">
+      <div className="space-y-6">
+        {/* Upload Section */}
         <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
           <div className="space-y-4">
             <label className="block text-lg font-semibold text-gray-100">
@@ -81,52 +112,49 @@ export default function FileUploadTest() {
             {uploading ? "Uploading..." : "Upload"}
           </button>
         </div>
+
+        {/* Error Message */}
         {error && (
           <div className="rounded-md bg-red-50 p-4">
             <div className="text-sm text-red-700">{error}</div>
           </div>
         )}
-        {uploadedUrl && (
-          <div className="rounded-md bg-green-50 p-4">
-            <p className="text-sm text-green-700">
-              File uploaded successfully!
-            </p>
-            <a
-              href={uploadedUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 text-sm text-blue-600 hover:underline break-all"
-            >
-              {uploadedUrl}
-            </a>
 
-            {uploadedUrl && (
-              <div className="mt-4 max-w-xs mx-auto">
+        {/* Preview and Color Scheme Section */}
+        {(uploadedUrl || image || (file && file.type.startsWith("image/"))) && (
+          <div className="flex flex-row gap-8">
+            {/* Image Preview */}
+            <div className="flex-1">
+              <div className="rounded-md bg-gray-800 p-4">
                 <img
-                  src={uploadedUrl}
-                  alt="Uploaded preview"
-                  className="object-contain w-full h-64 "
+                  src={
+                    uploadedUrl ||
+                    image ||
+                    (file ? URL.createObjectURL(file) : "")
+                  }
+                  alt="Preview"
+                  className="object-contain w-full h-64"
                 />
               </div>
-            )}
-          </div>
-        )}
-        {file && file.type.startsWith("image/") && !uploadedUrl && (
-          <div className="mt-4 max-w-xs mx-auto">
-            <img
-              src={URL.createObjectURL(file)}
-              alt="Preview"
-              className="object-contain w-full h-64"
-            />
-          </div>
-        )}
-        {image && (
-          <div className=" max-w-xs mx-auto">
-            <img
-              src={image}
-              alt="Preview"
-              className="object-contain w-full h-64"
-            />
+            </div>
+
+            {/* Color Scheme Legend */}
+            <div className="w-64 bg-gray-800 p-6 rounded-md">
+              <h3 className="text-lg font-semibold text-white mb-4">
+                Color Scheme
+              </h3>
+              <div className="space-y-4">
+                {colorSchemeItems.map((item, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <div
+                      className="h-4 w-4 rounded-sm"
+                      style={{ backgroundColor: item.color }}
+                    />
+                    <span className="text-gray-200">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
