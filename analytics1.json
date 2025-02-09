@@ -1,0 +1,536 @@
+{
+    "video_info": {
+        "filename": "raw.mp4",
+        "total_frames": 929,
+        "frame_width": 1920,
+        "frame_height": 1080,
+        "fps": 30,
+        "duration_seconds": 30.966666666666665
+    },
+    "processing_stats": {
+        "average_fps": 2.1221134478517496,
+        "total_processing_time": 5.65474009513855
+    },
+    "tracking_summary": {
+        "total_unique_objects": 0,
+        "tracks": {}
+    },
+    "frame_data": [
+        {
+            "frame_number": 0,
+            "timestamp": 0.0,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 308693,
+                        "area_percentage": 14.89,
+                        "estimated_weight_kg": 3.087
+                    },
+                    "metal": {
+                        "present": true,
+                        "pixel_count": 14,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.001
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 145778,
+                        "area_percentage": 7.03,
+                        "estimated_weight_kg": 1.166
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 4.254,
+                    "waste_coverage": 21.92,
+                    "distribution_evenness": 0.85
+                }
+            },
+            "tracked_objects": []
+        },
+        {
+            "frame_number": 1,
+            "timestamp": 0.03333333333333333,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 314329,
+                        "area_percentage": 15.16,
+                        "estimated_weight_kg": 3.143
+                    },
+                    "metal": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 102887,
+                        "area_percentage": 4.96,
+                        "estimated_weight_kg": 0.823
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 3.966,
+                    "waste_coverage": 20.12,
+                    "distribution_evenness": 0.9
+                }
+            },
+            "tracked_objects": []
+        },
+        {
+            "frame_number": 2,
+            "timestamp": 0.06666666666666667,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 407002,
+                        "area_percentage": 19.63,
+                        "estimated_weight_kg": 4.07
+                    },
+                    "metal": {
+                        "present": true,
+                        "pixel_count": 540,
+                        "area_percentage": 0.03,
+                        "estimated_weight_kg": 0.027
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 104441,
+                        "area_percentage": 5.04,
+                        "estimated_weight_kg": 0.836
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 4.933,
+                    "waste_coverage": 24.69,
+                    "distribution_evenness": 0.8
+                }
+            },
+            "tracked_objects": []
+        },
+        {
+            "frame_number": 3,
+            "timestamp": 0.1,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": true,
+                        "pixel_count": 1351,
+                        "area_percentage": 0.07,
+                        "estimated_weight_kg": 0.027
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 387970,
+                        "area_percentage": 18.71,
+                        "estimated_weight_kg": 3.88
+                    },
+                    "metal": {
+                        "present": true,
+                        "pixel_count": 4721,
+                        "area_percentage": 0.23,
+                        "estimated_weight_kg": 0.236
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 114932,
+                        "area_percentage": 5.54,
+                        "estimated_weight_kg": 0.919
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 5.062,
+                    "waste_coverage": 24.55,
+                    "distribution_evenness": 0.81
+                }
+            },
+            "tracked_objects": []
+        },
+        {
+            "frame_number": 4,
+            "timestamp": 0.13333333333333333,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 379129,
+                        "area_percentage": 18.28,
+                        "estimated_weight_kg": 3.791
+                    },
+                    "metal": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 59060,
+                        "area_percentage": 2.85,
+                        "estimated_weight_kg": 0.472
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 4.264,
+                    "waste_coverage": 21.13,
+                    "distribution_evenness": 0.85
+                }
+            },
+            "tracked_objects": []
+        },
+        {
+            "frame_number": 5,
+            "timestamp": 0.16666666666666666,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 434022,
+                        "area_percentage": 20.93,
+                        "estimated_weight_kg": 4.34
+                    },
+                    "metal": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 46643,
+                        "area_percentage": 2.25,
+                        "estimated_weight_kg": 0.373
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 4.713,
+                    "waste_coverage": 23.18,
+                    "distribution_evenness": 0.81
+                }
+            },
+            "tracked_objects": []
+        },
+        {
+            "frame_number": 6,
+            "timestamp": 0.2,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 289871,
+                        "area_percentage": 13.98,
+                        "estimated_weight_kg": 2.899
+                    },
+                    "metal": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 41391,
+                        "area_percentage": 2.0,
+                        "estimated_weight_kg": 0.331
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 3.23,
+                    "waste_coverage": 15.98,
+                    "distribution_evenness": 0.88
+                }
+            },
+            "tracked_objects": []
+        },
+        {
+            "frame_number": 7,
+            "timestamp": 0.23333333333333334,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": true,
+                        "pixel_count": 6532,
+                        "area_percentage": 0.32,
+                        "estimated_weight_kg": 0.131
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 213345,
+                        "area_percentage": 10.29,
+                        "estimated_weight_kg": 2.133
+                    },
+                    "metal": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 35033,
+                        "area_percentage": 1.69,
+                        "estimated_weight_kg": 0.28
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 2.544,
+                    "waste_coverage": 12.29,
+                    "distribution_evenness": 0.9
+                }
+            },
+            "tracked_objects": []
+        },
+        {
+            "frame_number": 8,
+            "timestamp": 0.26666666666666666,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": true,
+                        "pixel_count": 479,
+                        "area_percentage": 0.02,
+                        "estimated_weight_kg": 0.01
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 175337,
+                        "area_percentage": 8.46,
+                        "estimated_weight_kg": 1.753
+                    },
+                    "metal": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 33325,
+                        "area_percentage": 1.61,
+                        "estimated_weight_kg": 0.267
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 2.03,
+                    "waste_coverage": 10.09,
+                    "distribution_evenness": 0.92
+                }
+            },
+            "tracked_objects": []
+        },
+        {
+            "frame_number": 9,
+            "timestamp": 0.3,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": true,
+                        "pixel_count": 1078,
+                        "area_percentage": 0.05,
+                        "estimated_weight_kg": 0.022
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 151500,
+                        "area_percentage": 7.31,
+                        "estimated_weight_kg": 1.515
+                    },
+                    "metal": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 7906,
+                        "area_percentage": 0.38,
+                        "estimated_weight_kg": 0.063
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 1.6,
+                    "waste_coverage": 7.74,
+                    "distribution_evenness": 0.93
+                }
+            },
+            "tracked_objects": []
+        },
+        {
+            "frame_number": 10,
+            "timestamp": 0.3333333333333333,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 157641,
+                        "area_percentage": 7.6,
+                        "estimated_weight_kg": 1.576
+                    },
+                    "metal": {
+                        "present": false,
+                        "pixel_count": 0,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 163,
+                        "area_percentage": 0.01,
+                        "estimated_weight_kg": 0.001
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 1.578,
+                    "waste_coverage": 7.61,
+                    "distribution_evenness": 0.92
+                }
+            },
+            "tracked_objects": []
+        },
+        {
+            "frame_number": 11,
+            "timestamp": 0.36666666666666664,
+            "active_tracks": 0,
+            "segmentation_data": {
+                "image_size": {
+                    "height": 1080,
+                    "width": 1920
+                },
+                "waste_composition": {
+                    "rigid_plastic": {
+                        "present": true,
+                        "pixel_count": 14,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.0
+                    },
+                    "cardboard": {
+                        "present": true,
+                        "pixel_count": 662182,
+                        "area_percentage": 31.93,
+                        "estimated_weight_kg": 6.622
+                    },
+                    "metal": {
+                        "present": true,
+                        "pixel_count": 79,
+                        "area_percentage": 0.0,
+                        "estimated_weight_kg": 0.004
+                    },
+                    "soft_plastic": {
+                        "present": true,
+                        "pixel_count": 34906,
+                        "area_percentage": 1.68,
+                        "estimated_weight_kg": 0.279
+                    }
+                },
+                "total_stats": {
+                    "total_weight_kg": 6.905,
+                    "waste_coverage": 33.62,
+                    "distribution_evenness": 0.68
+                }
+            },
+            "tracked_objects": []
+        }
+    ]
+}
