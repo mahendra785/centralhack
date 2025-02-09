@@ -7,6 +7,20 @@ const nextConfig: NextConfig = {
       bodySizeLimit: '300mb',
     },
   },
+  images: {
+    remotePatterns: [
+        {
+            protocol: 'https',
+            hostname: 'storage.googleapis.com',
+            port: '',
+            pathname: `/${process.env.GOOGLE_CLOUD_PUBLIC_BUCKET}/**`,
+        },
+        {
+          protocol: 'https',
+          hostname: 'avatar.vercel.sh',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

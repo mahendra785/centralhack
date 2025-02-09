@@ -30,7 +30,7 @@ export async function processImage(imageUrl: string, imageId: string, userId: st
             },
         });
 
-        await prisma.wasteCompositionOfImage.createMany({
+       await prisma.wasteCompositionOfImage.createMany({
             data: [
                 {
                     wasteAnalysisOfImageId: analysis.id,
@@ -67,6 +67,10 @@ export async function processImage(imageUrl: string, imageId: string, userId: st
             ],
         });
 
+        const compositions = await prisma.wasteCompositionOfImage.findMany({
+            where: { wasteAnalysisOfImageId: analysis.id },
+        });
+
         await prisma.image.update({
             where: { id: imageId },
             data: { processedImageUrl }
@@ -74,7 +78,8 @@ export async function processImage(imageUrl: string, imageId: string, userId: st
 
         return {
             processedImageUrl,
-            analysis
+            analysis,
+            compositions
         };
     } catch (error) {
         console.error("Error analyzing waste:", error);
