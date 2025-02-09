@@ -1,0 +1,183 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+
+model User {
+  id String @id @default(cuid())
+
+  // Provided by Google OAuth
+  name  String
+  email String @unique
+  emailVerified DateTime?
+  image String?
+
+  accounts Account[]
+  sessions Session[]
+  images Image[]
+  videos Video[]
+
+  organizationId String?
+  organization Organization? @relation(fields: [organizationId], references: [id])
+  Role MembershipRole?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Organization {
+  id                     String                   @id @default(cuid())
+  name                   String
+  description            String
+  domain                 String                   @unique
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  
+  members User[]
+}
+
+model Image {
+  id                 String    @id @default(cuid())
+  name               String    @default("")
+  imageUrl          String
+  processedImageUrl String?
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  wasteAnalysis     WasteAnalysisOfImage?
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model Video {
+  id                 String    @id @default(cuid())
+  name               String    @default("")
+  videoUrl          String
+  processedVideoUrl String?
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  wasteAnalysis     WasteAnalysisOfVideo?
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model WasteAnalysisOfImage {
+  id                    String    @id @default(cuid())
+  imageId              String    @unique
+  image                Image     @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  
+  totalWeightKg        Float
+  wasteCoverage        Float
+  distributionEvenness Float
+  
+  compositions         WasteCompositionOfImage[]
+  
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}
+
+model WasteCompositionOfImage {
+  id                String        @id @default(cuid())
+  wasteAnalysisOfImageId   String
+  wasteAnalysisOfImage     WasteAnalysisOfImage @relation(fields: [wasteAnalysisOfImageId], references: [id], onDelete: Cascade)
+  
+  type              WasteType
+  present           Boolean
+  pixelCount        Int
+  areaPercentage    Float
+  estimatedWeightKg Float
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([wasteAnalysisOfImageId])
+}
+
+model WasteAnalysisOfVideo {
+  id                    String    @id @default(cuid())
+  videoId              String    @unique
+  video                Video     @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  
+  totalWeightKg        Float
+  
+  compositions         WasteCompositionOfVideo[]
+  
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}
+
+model WasteCompositionOfVideo {
+  id                String        @id @default(cuid())
+  wasteAnalysisOfVideoId   String
+  wasteAnalysisOfVideo     WasteAnalysisOfVideo @relation(fields: [wasteAnalysisOfVideoId], references: [id], onDelete: Cascade)
+  
+  type              WasteType
+  present           Boolean
+  estimatedWeightKg Float
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([wasteAnalysisOfVideoId])
+}
+
+
+enum WasteType {
+  RIGID_PLASTIC
+  CARDBOARD
+  METAL
+  SOFT_PLASTIC
+}
+
+enum MembershipRole {
+  ADMIN
+  MEMBER
+}
+
+model EsgReport {
+  id String @id @default(cuid())
+}

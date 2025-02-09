@@ -1,0 +1,46 @@
+{
+    "timestamp": "2025-02-09T00:39:22.475296",
+    "video_info": {
+        "duration_seconds": 3.0,
+        "frame_width": 1920,
+        "frame_height": 1080,
+        "fps": 2.0
+    },
+    "material_composition": {
+        "soft_plastic": {
+            "count": 3,
+            "total_weight": 0.117952,
+            "mean_area": 9829.333333333334,
+            "mean_duration": 0.0,
+            "confidence": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "mean_confidence": 1.0
+        },
+        "cardboard": {
+            "count": 7,
+            "total_weight": 0.0291315,
+            "mean_area": 693.6071428571429,
+            "mean_duration": 0.14285714285714285,
+            "confidence": [
+                1.0,
+                1.0,
+                0.827224586288416,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+            ],
+            "mean_confidence": 0.9753177980412023
+        }
+    },
+    "total_stats": {
+        "total_objects": 10,
+        "total_weight_kg": 0.1470835,
+        "throughput_kg_per_hour": 176.5002,
+        "active_tracks": 0,
+        "completed_tracks": 10
+    }
+}
